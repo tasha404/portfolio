@@ -27,7 +27,6 @@ import {
 import { DiJava } from "react-icons/di";
 import { BiLogoVisualStudio } from "react-icons/bi";
 
-
 const techStack = [
   { icon: <SiReact /> },
   { icon: <SiJavascript /> },
@@ -40,81 +39,62 @@ const techStack = [
   { icon: <SiFlutter /> },
   { icon: <SiKotlin /> },
   { icon: <SiAndroidstudio /> },
-    { icon: <SiPhp /> },
-    { icon: <DiJava /> },
-    { icon: <SiDart /> },
-    { icon: <SiFigma /> },
-    { icon: <SiNotion /> },
-    { icon: <SiGithub /> },
-    { icon: <SiNetlify /> },
-    { icon: <SiVercel /> },
-    { icon: <SiOpencv /> },
-    { icon: <BiLogoVisualStudio /> },
-    { icon: <SiArduino /> },
-    { icon: <SiRaspberrypi /> },
-    { icon: <SiMysql /> },
-    { icon: <SiSqlite /> },
+  { icon: <SiPhp /> },
+  { icon: <DiJava /> },
+  { icon: <SiDart /> },
+  { icon: <SiFigma /> },
+  { icon: <SiNotion /> },
+  { icon: <SiGithub /> },
+  { icon: <SiNetlify /> },
+  { icon: <SiVercel /> },
+  { icon: <SiOpencv /> },
+  { icon: <BiLogoVisualStudio /> },
+  { icon: <SiArduino /> },
+  { icon: <SiRaspberrypi /> },
+  { icon: <SiMysql /> },
+  { icon: <SiSqlite /> },
 ];
 
 export default function TechStack() {
   const sectionRef = useRef(null);
-  const [active, setActive] = useState(() => {
-  return localStorage.getItem("techAnimated") === "true";
-});
+  const [active, setActive] = useState(false);
 
-  // ✅ Generate circle positions ONCE
+  // 🔥 CLEAN CIRCLE LAYOUT
   const [positions] = useState(() => {
-  const minDistance = 8;
-  let points = [];
+    const radius = 30;
+    const centerX = 50;
+    const centerY = 50;
 
-  return techStack.map((_, i) => {
-    let x, y;
-    let valid = false;
+    return techStack.map((_, i) => {
+      const angle = (i / techStack.length) * 2 * Math.PI;
 
-    while (!valid) {
-      x = 50 + (Math.random() - 0.5) * 30;
-      y = 50 + (Math.random() - 0.5) * 30;
+      return {
+        x: centerX + radius * Math.cos(angle),
+        y: centerY + radius * Math.sin(angle),
+        delay: `${i * 0.05}s`,
+        scale: 0.85 + Math.random() * 0.3,
+      };
+    });
+  });
 
-      valid = points.every((p) => {
-        const dx = p.x - x;
-        const dy = p.y - y;
-        return Math.sqrt(dx * dx + dy * dy) > minDistance;
-      });
+  // 👀 SCROLL ANIMATION
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setActive(entry.isIntersecting);
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
     }
 
-    points.push({ x, y });
-
-    return {
-      x,
-      y,
-      delay: `${i * 0.05}s`,
-    };
-  });
-});
-
-  // ✅ Trigger ONCE when visible
-  useEffect(() => {
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        setActive(true);   // 🔥 animate in
-      } else {
-        setActive(false);  // 🔥 reset when leaving
-      }
-    },
-    { threshold: 0.3 }
-  );
-
-  if (sectionRef.current) {
-    observer.observe(sectionRef.current);
-  }
-
-  return () => observer.disconnect();
-}, []);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className="tech-circle" ref={sectionRef}>
-      {/* CENTER TEXT */}
       <div className="center-text">TECH STACK</div>
 
       <div className={`circle-container ${active ? "active" : ""}`}>
@@ -126,6 +106,7 @@ export default function TechStack() {
               "--x": positions[index].x + "%",
               "--y": positions[index].y + "%",
               "--delay": positions[index].delay,
+              "--scale": positions[index].scale,
             }}
           >
             {tech.icon}
