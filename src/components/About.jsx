@@ -29,34 +29,50 @@ export default function About() {
   <div className="achievements-grid">
     
     <div className="achievement-card">
-      <span className="achievement-tag">FYP</span>
-      <h4>CCTV Stranger Detector</h4>
+      <span className="achievement-tag">DEAN'S LIST</span>
+      <h4>Semester 2</h4>
       <p>
-        Final Year Project using AI & Computer Vision for real-time surveillance detection.
+        GPA: 3.55 / 4.00
       </p>
     </div>
 
     <div className="achievement-card">
-      <span className="achievement-tag">Certification</span>
-      <h4>AI & Machine Learning</h4>
+      <span className="achievement-tag">DEAN'S LIST</span>
+      <h4>Semester 3</h4>
       <p>
-        Completed certification covering machine learning fundamentals and AI applications.
+        GPA: 3.95 / 4.00
       </p>
     </div>
 
     <div className="achievement-card">
-      <span className="achievement-tag">Workshop</span>
-      <h4>ICT Program Organizer</h4>
+      <span className="achievement-tag">DEAN'S LIST</span>
+      <h4>Semester 5</h4>
       <p>
-        Organized and conducted ICT workshops for students aged 8–12.
+        GPA: 3.75 / 4.00
       </p>
     </div>
 
     <div className="achievement-card">
-      <span className="achievement-tag">Development</span>
-      <h4>Full-Stack Projects</h4>
+      <span className="achievement-tag">DEAN'S LIST</span>
+      <h4>Semester 6</h4>
       <p>
-        Built multiple applications including AI chatbot, image editor, and task manager.
+        GPA: 3.65 / 4.00
+      </p>
+    </div>
+
+    <div className="achievement-card">
+      <span className="achievement-tag">DEAN'S LIST</span>
+      <h4>Semester 8</h4>
+      <p>
+        GPA: 3.89 / 4.00
+      </p>
+    </div>
+
+    <div className="achievement-card">
+      <span className="achievement-tag">CERTIFICATION</span>
+      <h4>MUET</h4>
+      <p>
+        Band : 4.0
       </p>
     </div>
 
