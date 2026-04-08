@@ -60,7 +60,6 @@ const projects = [
   title: "CCTV Stranger Detector",
   description:
     "AI-powered surveillance system that detects and identifies unknown individuals in real-time using computer vision and face recognition.",
-  image: "/images/cctv.png",
   link: "https://your-project-link.com", // youtube demo link
   status: "COMPLETED",
   tech: [
@@ -76,7 +75,6 @@ const projects = [
   title: "Jump Realm",
   description:
   "A fast-paced platformer inspired by classic arcade games, where players navigate obstacles while being chased by a relentless boss that attacks with arrows, testing reflexes, timing, and survival skills.",
-  image: "/images/cctv.png",
   link: "https://www.youtube.com/shorts/GBnp0Fy55JY", // youtube demo link
   status: "COMPLETED",
   tech: [
