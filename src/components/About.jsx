@@ -10,8 +10,8 @@ export default function About() {
         </h1>
 
         <p>
-          I am a Computer Science student specializing in AI systems,
-          web applications, and real-time surveillance solutions.
+          I’m a Computer Science student driven to build intelligent, scalable, and user-centered digital solutions.
+With experience in <strong> AI systems, web and mobile development, and real-time technologies</strong>, I continuously strive to improve my skills and grow beyond my previous work with every project I take on.
         </p>
 
         <a
