@@ -1,34 +1,39 @@
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 
-export default function Navbar() {
+export default function Navbar({ page, setPage }) {
   return (
     <nav className="navbar">
-      <img src="/images/tasha.png" alt="logo" className="logo" />
-
-      <div className="nav-icons">
+      <div className="nav-name" style={{ cursor: "pointer" }} onClick={() => setPage("home")}>
+        Natasha <span>Nadia</span>
+      </div>
+      <div className="nav-right">
         <a
-          href="https://github.com/tasha404"
-          target="_blank"
-          rel="noopener noreferrer"
+          className="nav-link"
+          href="#about"
+          onClick={(e) => { e.preventDefault(); setPage("home"); setTimeout(() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" }), 100); }}
         >
-          <FaGithub />
+          About
         </a>
-
         <a
-          href="https://www.linkedin.com/in/ntashanadia"
-          target="_blank"
-          rel="noopener noreferrer"
+          className="nav-link"
+          href="#projects"
+          onClick={(e) => { e.preventDefault(); setPage("home"); setTimeout(() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" }), 100); }}
         >
-          <FaLinkedin />
+          Projects
         </a>
-
         <a
-          href="https://instagram.com/ntashandia"
-          target="_blank"
-          rel="noopener noreferrer"
+          className="nav-link"
+          onClick={(e) => { e.preventDefault(); setPage("postcards"); window.scrollTo(0, 0); }}
+          href="#postcards"
+          style={{ color: page === "postcards" ? "var(--plum)" : undefined }}
         >
-          <FaInstagram />
+          ✉ Postcards
         </a>
+        <div className="nav-icons">
+          <a href="https://github.com/tasha404" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+          <a href="https://www.linkedin.com/in/ntashanadia" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+          <a href="https://instagram.com/ntashandia" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+        </div>
       </div>
     </nav>
   );
