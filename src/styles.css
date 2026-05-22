@@ -1280,94 +1280,180 @@ footer {
     letter-spacing: 0.12em;
 }
 
+/* ─── HAMBURGER & MOBILE DRAWER ─── */
+.nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 600;
+    flex-shrink: 0;
+}
+
+.nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+}
+
+.nav-hamburger.open span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+}
+
+.nav-hamburger.open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.nav-hamburger.open span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+}
+
+.nav-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(300px, 82vw);
+    background: rgba(250, 245, 238, 0.98);
+    backdrop-filter: blur(16px);
+    border-left: 1px solid var(--border2);
+    z-index: 550;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 40px;
+    gap: 48px;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    visibility: hidden;
+}
+
+.nav-drawer.open {
+    transform: translateX(0);
+    visibility: visible;
+}
+
+.nav-drawer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.nav-drawer-link {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--ink);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s;
+    line-height: 1;
+}
+
+.nav-drawer-link:hover {
+    color: var(--rose);
+}
+
+.nav-drawer-icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-drawer-icons a {
+    color: var(--dimmed);
+    font-size: 20px;
+    display: flex;
+    transition: color 0.2s;
+}
+
+.nav-drawer-icons a:hover {
+    color: var(--rose);
+}
+
+.nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 14, 12, 0.3);
+    z-index: 540;
+    backdrop-filter: blur(2px);
+}
+
 /* ─── RESPONSIVE ─── */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 18px 32px;
+    }
+
+    .hero-left {
+        padding: 130px 40px 80px;
+    }
+
+    .hero-date {
+        left: 40px;
+    }
+
+    .hero-scroll {
+        left: 40px;
+    }
+
+    .about {
+        padding: 90px 40px;
+        gap: 48px;
+    }
+
+    .projects {
+        padding: 90px 40px;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .project-card:first-child {
+        grid-column: span 2;
+    }
+
+    .tech-section {
+        padding: 90px 40px;
+    }
+
+    .postcards-page {
+        padding: 110px 40px 70px;
+    }
+
+    footer {
+        padding: 32px 40px;
+    }
+}
+
+/* Tablet portrait & large mobile */
 @media (max-width: 900px) {
     .navbar {
         padding: 16px 22px;
     }
 
-    .nav-link {
+    /* Show hamburger, hide desktop links */
+    .nav-hamburger {
+        display: flex;
+    }
+
+    .nav-right {
         display: none;
-    }
-
-    .hero {
-        grid-template-columns: 1fr;
-    }
-
-    .hero-left {
-        padding: 112px 22px 40px;
-    }
-
-    .hero::after {
-        display: none;
-    }
-
-    .hero-right {
-        height: 48vh;
-    }
-
-    .hero-image-frame {
-        height: 100%;
-    }
-
-    .hero-scroll {
-        left: 22px;
-    }
-
-    .hero-date {
-        left: 22px;
-    }
-
-    .about {
-        grid-template-columns: 1fr;
-        padding: 72px 22px;
-    }
-
-    .about-right {
-        position: static;
-    }
-
-    .about-card {
-        box-shadow: 4px 4px 0 var(--rose-lt);
-    }
-
-    .achievements-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .projects {
-        padding: 72px 22px;
-    }
-
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .project-card:first-child {
-        grid-column: span 1;
-    }
-
-    .tech-section {
-        padding: 72px 22px;
-    }
-
-    .tech-categories {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .postcards-page {
-        padding: 96px 22px 60px;
-    }
-
-    .notes-grid {
-        columns: 2;
-    }
-
-    footer {
-        padding: 28px 22px;
-        flex-direction: column;
-        gap: 8px;
-        text-align: center;
     }
 
     body {
@@ -1378,16 +1464,234 @@ footer {
     .cursor-ring {
         display: none;
     }
+
+    /* ── Hero ── */
+    .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .hero::after {
+        display: none;
+    }
+
+    .hero-left {
+        padding: 110px 24px 40px;
+        min-height: 70vh;
+    }
+
+    .hero-date {
+        left: 24px;
+        top: 80px;
+    }
+
+    .hero-scroll {
+        left: 24px;
+        bottom: 20px;
+    }
+
+    .hero-right {
+        height: 52vw;
+        min-height: 240px;
+        max-height: 480px;
+    }
+
+    .hero-image-frame {
+        height: 100%;
+    }
+
+    /* ── About ── */
+    .about {
+        grid-template-columns: 1fr;
+        padding: 72px 24px;
+        gap: 40px;
+    }
+
+    .about-right {
+        position: static;
+        max-width: 360px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .about-card {
+        box-shadow: 4px 4px 0 var(--rose-lt);
+        aspect-ratio: 4/3;
+    }
+
+    .about-body {
+        max-width: 100%;
+    }
+
+    .achievements-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* ── Projects ── */
+    .projects {
+        padding: 72px 24px;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card:first-child {
+        grid-column: span 1;
+    }
+
+    /* ── Tech Stack ── */
+    .tech-section {
+        padding: 72px 24px;
+    }
+
+    .tech-categories {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* ── Postcards ── */
+    .postcards-page {
+        padding: 96px 24px 60px;
+    }
+
+    .note-form-wrap {
+        padding: 24px 20px;
+    }
+
+    .notes-grid {
+        columns: 2;
+    }
+
+    /* ── Footer ── */
+    footer {
+        padding: 28px 24px;
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
 }
 
-@media (max-width: 500px) {
+/* Small mobile */
+@media (max-width: 600px) {
 
-    .achievements-grid,
+    /* ── Navbar ── */
+    .navbar {
+        padding: 14px 18px;
+    }
+
+    /* ── Hero ── */
+    .hero-left {
+        padding: 100px 18px 36px;
+    }
+
+    .hero-date {
+        left: 18px;
+        top: 72px;
+    }
+
+    .hero-scroll {
+        left: 18px;
+    }
+
+    .hero-headline {
+        font-size: clamp(42px, 11vw, 64px);
+    }
+
+    .hero-sub {
+        font-size: 14px;
+        max-width: 100%;
+    }
+
+    .hero-right {
+        height: 60vw;
+    }
+
+    /* ── About ── */
+    .about {
+        padding: 60px 18px;
+    }
+
+    .about-headline {
+        font-size: clamp(32px, 9vw, 48px);
+    }
+
+    .achievements-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    /* ── Projects ── */
+    .projects {
+        padding: 60px 18px;
+    }
+
+    .projects-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 36px;
+    }
+
+    /* ── Tech ── */
+    .tech-section {
+        padding: 60px 18px;
+    }
+
     .tech-categories {
         grid-template-columns: 1fr;
     }
 
+    /* ── Postcards ── */
+    .postcards-page {
+        padding: 86px 18px 48px;
+    }
+
+    .note-form-wrap {
+        padding: 20px 16px;
+        box-shadow: 3px 3px 0 var(--rose-lt);
+    }
+
     .notes-grid {
         columns: 1;
+    }
+
+    .notes-section h2 {
+        font-size: 20px;
+    }
+
+    /* ── Footer ── */
+    footer {
+        padding: 24px 18px;
+    }
+}
+
+/* Extra small mobile */
+@media (max-width: 380px) {
+    .hero-left {
+        padding: 94px 16px 32px;
+    }
+
+    .about {
+        padding: 52px 16px;
+    }
+
+    .achievements-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .projects {
+        padding: 52px 16px;
+    }
+
+    .tech-section {
+        padding: 52px 16px;
+    }
+
+    .postcards-page {
+        padding: 80px 16px 40px;
+    }
+
+    footer {
+        padding: 20px 16px;
     }
 }

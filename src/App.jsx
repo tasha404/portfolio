@@ -35,7 +35,7 @@ export default function App() {
           <TechStack />
           <footer>
             <span className="footer-name">Natasha Nadia</span>
-            <span className="footer-copy">© 2025 — All rights reserved</span>
+            <span className="footer-copy">© 2026 — All rights reserved</span>
           </footer>
         </>
       ) : (

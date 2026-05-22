@@ -93,7 +93,7 @@ ONLY return the JSON, nothing else.`,
 
         {success && (
           <div style={{ background: "rgba(110,48,42,0.07)", border: "1px solid var(--rose-lt)", borderRadius: 3, padding: "12px 16px", marginBottom: 16, fontSize: 13, color: "var(--rose-dk)", fontFamily: "var(--mono)", letterSpacing: "0.05em" }}>
-            ✓ postcard delivered! thank you 🌿
+            ✓ postcard delivered! thank you !
           </div>
         )}
         {error && (
@@ -122,9 +122,9 @@ ONLY return the JSON, nothing else.`,
           <h2>{notes.length} postcard{notes.length !== 1 ? "s" : ""} received ✦</h2>
         )}
         {fetching ? (
-          <div className="notes-empty" style={{ fontStyle: "normal", fontSize: 14 }}>loading... 🌿</div>
+          <div className="notes-empty" style={{ fontStyle: "normal", fontSize: 14 }}>loading...</div>
         ) : notes.length === 0 ? (
-          <div className="notes-empty">be the first to leave a note 🌿</div>
+          <div className="notes-empty">be the first to leave a note !</div>
         ) : (
           <div className="notes-grid">
             {notes.map((note) => (
