@@ -31,7 +31,7 @@ export default function Postcards() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!name.trim() || !message.trim()) { setError("Please fill in both fields ✦"); return; }
+    if (!name.trim() || !message.trim()) { setError("Please fill in both fields"); return; }
     setError("");
     setLoading(true);
 
@@ -57,7 +57,7 @@ ONLY return the JSON, nothing else.`,
       try { parsed = JSON.parse(text.replace(/```json|```/g, "").trim()); }
       catch { parsed = { approved: true, polished: message }; }
       if (!parsed.approved) {
-        setError("Hmm, that message didn't quite pass. Try something nicer! 🌿");
+        setError("Hmm, that message didn't quite pass. Try something nicer!");
         setLoading(false);
         return;
       }
@@ -74,7 +74,7 @@ ONLY return the JSON, nothing else.`,
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
     } catch {
-      setError("Something went wrong. Try again! 🌿");
+      setError("Something went wrong. Try again :3");
     }
     setLoading(false);
   }
@@ -83,13 +83,13 @@ ONLY return the JSON, nothing else.`,
     <div className="postcards-page">
       <div className="postcards-header">
         <p className="section-label" style={{ justifyContent: "center" }}>Guestbook</p>
-        <h1><em>Postcards</em> ✦</h1>
-        <p>You stopped by — leave a little trace! Say hi, share a thought, drop some encouragement. Every note means a lot 🌿</p>
+        <h1><em>Postcards</em></h1>
+        <p>You stopped by — leave a little trace! Say hi, share a thought, drop some encouragement. Every note means a lot</p>
       </div>
 
       <div className="note-form-wrap">
         <h2>Leave a note</h2>
-        <p>it's going to be shared publicly, no cussing :3</p>
+        <p>PLEASEEEE LEAVE SOMETHING I BEG</p>
 
         {success && (
           <div style={{ background: "rgba(110,48,42,0.07)", border: "1px solid var(--rose-lt)", borderRadius: 3, padding: "12px 16px", marginBottom: 16, fontSize: 13, color: "var(--rose-dk)", fontFamily: "var(--mono)", letterSpacing: "0.05em" }}>
@@ -109,10 +109,10 @@ ONLY return the JSON, nothing else.`,
           </div>
           <div className="note-field">
             <label>Your message</label>
-            <textarea rows={4} placeholder="say something nice ✦" value={message} onChange={(e) => setMessage(e.target.value)} maxLength={300} />
+            <textarea rows={4} placeholder="it's going to be shared publicly, no cussing :3" value={message} onChange={(e) => setMessage(e.target.value)} maxLength={300} />
           </div>
           <button className="note-submit" type="submit" disabled={loading}>
-            {loading ? "sending... ✦" : "Send postcard ✉"}
+            {loading ? "sending... " : "Send"}
           </button>
         </form>
       </div>
