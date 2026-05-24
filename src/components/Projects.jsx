@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import {
   SiOpencv, SiJavascript, SiCss, SiReact, SiHtml5,
   SiFirebase, SiOpenai, SiCplusplus, SiRaspberrypi,
@@ -8,11 +8,19 @@ import {
 const projects = [
   {
     title: "BunnyDo !",
-    description: "A cute and interactive to-do list web app making task management fun — clean UI, smooth interactions, user-friendly task organisation.",
+    description: "A cute interactive to-do list web app making task management fun — clean UI, smooth interactions, user-friendly task organisation.",
     image: "/images/bunnydo.png",
     link: "https://bunnydo.vercel.app/",
     status: "COMPLETED",
-    tech: [{ icon: <SiFirebase />, name: "Firebase" }, { icon: <SiReact />, name: "React" }, { icon: <SiJavascript />, name: "JavaScript" }, { icon: <SiCss />, name: "CSS" }, { icon: <SiHtml5 />, name: "HTML5" }],
+    accentColor: "#c87c78",
+    thumbnail: { emoji: "🐰", bg: "linear-gradient(135deg, #ffe4e1 0%, #ffd6d4 60%, #ffbcb8 100%)", label: "task app" },
+    tech: [
+      { icon: <SiFirebase />, name: "Firebase" },
+      { icon: <SiReact />, name: "React" },
+      { icon: <SiJavascript />, name: "JS" },
+      { icon: <SiCss />, name: "CSS" },
+      { icon: <SiHtml5 />, name: "HTML5" },
+    ],
   },
   {
     title: "Peachy Pixels",
@@ -20,7 +28,14 @@ const projects = [
     image: "/images/peachypixels.png",
     link: "https://peachypixels.vercel.app/",
     status: "ONGOING",
-    tech: [{ icon: <SiReact />, name: "React" }, { icon: <SiJavascript />, name: "JavaScript" }, { icon: <SiCss />, name: "CSS" }, { icon: <SiHtml5 />, name: "HTML5" }],
+    accentColor: "#d4956a",
+    thumbnail: { emoji: "🍑", bg: "linear-gradient(135deg, #fde8d8 0%, #fad5b5 60%, #f5bc8c 100%)", label: "image editor" },
+    tech: [
+      { icon: <SiReact />, name: "React" },
+      { icon: <SiJavascript />, name: "JS" },
+      { icon: <SiCss />, name: "CSS" },
+      { icon: <SiHtml5 />, name: "HTML5" },
+    ],
   },
   {
     title: "KiinAI",
@@ -28,23 +43,44 @@ const projects = [
     image: "/images/kiinai.png",
     link: "https://kiinai.vercel.app/",
     status: "ONGOING",
-    tech: [{ icon: <SiOpenai />, name: "OpenAI" }, { icon: <SiFirebase />, name: "Firebase" }, { icon: <SiReact />, name: "React" }, { icon: <SiJavascript />, name: "JavaScript" }],
+    accentColor: "#7a8fa6",
+    thumbnail: { emoji: "🤖", bg: "linear-gradient(135deg, #dce8f0 0%, #c4d9e8 60%, #a8c4d8 100%)", label: "AI chatbot" },
+    tech: [
+      { icon: <SiOpenai />, name: "OpenAI" },
+      { icon: <SiFirebase />, name: "Firebase" },
+      { icon: <SiReact />, name: "React" },
+      { icon: <SiJavascript />, name: "JS" },
+    ],
   },
   {
     title: "Path Raiders",
-    description: "A pathfinding visualiser that brings algorithms to life through interactive, animated step-by-step demonstrations.",
+    description: "A pathfinding visualiser bringing algorithms to life through interactive, animated step-by-step demonstrations.",
     image: "/images/pathraiders.png",
     link: "https://path-raiders.vercel.app/",
     status: "COMPLETED",
-    tech: [{ icon: <SiPython />, name: "Python" }, { icon: <SiCss />, name: "CSS" }, { icon: <SiHtml5 />, name: "HTML5" }],
+    accentColor: "#6e8c6a",
+    thumbnail: { emoji: "🗺️", bg: "linear-gradient(135deg, #d8ecd6 0%, #bfd9bb 60%, #9fc49a 100%)", label: "visualiser" },
+    tech: [
+      { icon: <SiPython />, name: "Python" },
+      { icon: <SiCss />, name: "CSS" },
+      { icon: <SiHtml5 />, name: "HTML5" },
+    ],
   },
   {
     title: "CCTV Stranger Detector",
     description: "AI-powered surveillance system detecting unknown individuals in real-time using computer vision and face recognition.",
     image: null,
-    link: "https://your-project-link.com",
+    link: null,
     status: "COMPLETED",
-    tech: [{ icon: <SiOpencv />, name: "OpenCV" }, { icon: <SiRaspberrypi />, name: "Raspberry Pi" }, { icon: <SiFlutter />, name: "Flutter" }, { icon: <SiCplusplus />, name: "C++" }, { icon: <SiFirebase />, name: "Firebase" }],
+    accentColor: "#8a6a9a",
+    thumbnail: {  bg: "linear-gradient(135deg, #e8daf0 0%, #d4c0e4 60%, #bfa0d4 100%)", label: "CV · IoT" },
+    tech: [
+      { icon: <SiOpencv />, name: "OpenCV" },
+      { icon: <SiRaspberrypi />, name: "Pi" },
+      { icon: <SiFlutter />, name: "Flutter" },
+      { icon: <SiCplusplus />, name: "C++" },
+      { icon: <SiFirebase />, name: "Firebase" },
+    ],
   },
   {
     title: "Jump Realm",
@@ -52,56 +88,133 @@ const projects = [
     image: null,
     link: "https://www.youtube.com/shorts/GBnp0Fy55JY",
     status: "COMPLETED",
-    tech: [{ icon: <SiKotlin />, name: "Kotlin" }, { icon: <SiAndroidstudio />, name: "Android Studio" }],
+    accentColor: "#b0804e",
+    thumbnail: { bg: "linear-gradient(135deg, #f0e0c8 0%, #e4ccaa 60%, #d4b080 100%)", label: "android game" },
+    tech: [
+      { icon: <SiKotlin />, name: "Kotlin" },
+      { icon: <SiAndroidstudio />, name: "Android" },
+    ],
   },
 ];
 
+/* ── 3-D tilt on mouse move ── */
+function useTilt(ref) {
+  const handleMove = useCallback((e) => {
+    const card = ref.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = (e.clientX - cx) / (rect.width / 2);
+    const dy = (e.clientY - cy) / (rect.height / 2);
+    card.style.transform = `perspective(800px) rotateX(${-dy * 6}deg) rotateY(${dx * 6}deg) scale(1.03)`;
+    card.style.setProperty("--glow-x", `${((e.clientX - rect.left) / rect.width) * 100}%`);
+    card.style.setProperty("--glow-y", `${((e.clientY - rect.top) / rect.height) * 100}%`);
+  }, [ref]);
+
+  const handleLeave = useCallback(() => {
+    if (!ref.current) return;
+    ref.current.style.transform = "perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)";
+  }, [ref]);
+
+  return { handleMove, handleLeave };
+}
+
+/* ── Project thumbnail ── */
+function Thumbnail({ project }) {
+  // Prefer real screenshot if available
+  if (project.image) {
+    return (
+      <div className="pcard-thumb">
+        <img src={project.image} alt={project.title} className="pcard-img" loading="lazy" />
+        <div className="pcard-img-overlay" style={{ "--accent": project.accentColor }} />
+      </div>
+    );
+  }
+  // Generated thumbnail for projects without screenshots
+  return (
+    <div className="pcard-thumb pcard-thumb-gen" style={{ background: project.thumbnail.bg }}>
+      <span className="pcard-thumb-emoji">{project.thumbnail.emoji}</span>
+      <span className="pcard-thumb-label">{project.thumbnail.label}</span>
+      <div className="pcard-thumb-grid" />
+    </div>
+  );
+}
+
+/* ── Single card ── */
+function ProjectCard({ project, index }) {
+  const cardRef = useRef(null);
+  const { handleMove, handleLeave } = useTilt(cardRef);
+
+  const Wrapper = project.link ? "a" : "div";
+  const wrapperProps = project.link
+    ? { href: project.link, target: "_blank", rel: "noopener noreferrer" }
+    : {};
+
+  return (
+    <Wrapper
+      {...wrapperProps}
+      ref={cardRef}
+      className="pcard fade-up"
+      style={{ "--accent": project.accentColor, animationDelay: `${index * 0.07}s` }}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+    >
+      {/* glow layer */}
+      <div className="pcard-glow" />
+
+      <Thumbnail project={project} />
+
+      <div className="pcard-body">
+        <div className="pcard-meta">
+          <span className={`pcard-status ${project.status.toLowerCase()}`}>{project.status}</span>
+          {project.link && <span className="pcard-arrow">↗</span>}
+        </div>
+        <h3 className="pcard-title">{project.title}</h3>
+        <p className="pcard-desc">{project.description}</p>
+
+        {project.tech && (
+          <div className="pcard-tech">
+            {project.tech.map((t, j) => (
+              <span className="pcard-tech-chip" key={j} title={t.name}>
+                <span className="pcard-tech-icon">{t.icon}</span>
+                <span className="pcard-tech-name">{t.name}</span>
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </Wrapper>
+  );
+}
+
+/* ── Projects section ── */
 export default function Projects() {
-  const ref = useRef(null);
+  const sectionRef = useRef(null);
+
   useEffect(() => {
-    const cards = ref.current?.querySelectorAll(".project-card");
+    const cards = sectionRef.current?.querySelectorAll(".fade-up");
     const obs = new IntersectionObserver(
       (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("visible"); }),
-      { threshold: 0.08 }
+      { threshold: 0.06 }
     );
     cards?.forEach((c) => obs.observe(c));
     return () => obs.disconnect();
   }, []);
 
   return (
-    <section className="projects" id="projects" ref={ref}>
-      <div className="projects-header">
+    <section className="projects" id="projects" ref={sectionRef}>
+      <div className="projects-header fade-up">
         <div>
           <p className="section-label">Selected work</p>
           <h2>My <em>Projects</em></h2>
         </div>
         <span className="projects-count">{projects.length} projects</span>
       </div>
-      <div className="projects-grid">
-        {projects.map((project, i) => (
-          <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-card fade-up" key={i}>
-            <div className="card-image">
-              {project.image
-                ? <img src={project.image} alt={project.title} />
-                : <div className="card-image-placeholder">{project.title}</div>}
-              <div className="card-image-overlay" />
-            </div>
-            <div className="card-arrow">↗</div>
-            <div className="card-content">
-              <span className={`status ${project.status.toLowerCase() === "completed" ? "completed" : "ongoing"}`}>
-                {project.status}
-              </span>
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
-              {project.tech && (
-                <div className="tech-icons">
-                  {project.tech.map((t, j) => (
-                    <div className="tech-icon" title={t.name} key={j}>{t.icon}</div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </a>
+
+      <div className="pcard-grid">
+        {projects.map((p, i) => (
+          <ProjectCard key={p.title} project={p} index={i} />
         ))}
       </div>
     </section>

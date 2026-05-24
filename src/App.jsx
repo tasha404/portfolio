@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
-import Projects from "./components/Projects";
+import Projects from "./components/Projects";       // ← enhanced version
 import TechStack from "./components/TechStack";
+import Terminal from "./components/Terminal";         // ← NEW
+import EasterEggs from "./components/EasterEggs";    // ← NEW
 import Postcards from "./pages/Postcards";
 import Contact from "./pages/Contact";
 
@@ -27,6 +29,7 @@ export default function App() {
   return (
     <>
       <Cursor />
+      <EasterEggs />     
       <Navbar page={page} setPage={setPage} />
 
       {page === "home" && (
@@ -36,14 +39,27 @@ export default function App() {
           <Projects />
           <TechStack />
           <footer>
-            <span className="footer-copy">© 2026 — All rights reserved</span>
+            {/* "© 2026" is a hidden easter egg trigger */}
+            <span className="footer-copy">
+              © 2026 — All rights reserved
+              {" · "}
+              <span
+                className="footer-secret"
+                data-easter-egg="labs"
+                title="👀"
+              >
+                404
+              </span>
+            </span>
           </footer>
         </>
       )}
 
       {page === "postcards" && <Postcards />}
-
       {page === "contact" && <Contact />}
+
+      {/* Terminal floats on every page */}
+      <Terminal />
     </>
   );
 }

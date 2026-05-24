@@ -15,7 +15,7 @@ export default function Hero() {
           AI systems, web &amp; mobile development, real-time
           technologies — made with care, one project at a time.
         </p>
-        <a href="#about" className="hero-cta">
+        <a href="#projects" className="hero-cta">
           See my work <span className="hero-cta-arrow">→</span>
         </a>
         <div className="hero-scroll">
