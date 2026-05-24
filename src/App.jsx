@@ -5,6 +5,7 @@ import About from "./components/About";
 import Projects from "./components/Projects";
 import TechStack from "./components/TechStack";
 import Postcards from "./pages/Postcards";
+import Contact from "./pages/Contact";
 
 function Cursor() {
   const dot = useRef(null);
@@ -27,20 +28,22 @@ export default function App() {
     <>
       <Cursor />
       <Navbar page={page} setPage={setPage} />
-      {page === "home" ? (
+
+      {page === "home" && (
         <>
           <Hero />
           <About />
           <Projects />
           <TechStack />
           <footer>
-
             <span className="footer-copy">© 2026 — All rights reserved</span>
           </footer>
         </>
-      ) : (
-        <Postcards />
       )}
+
+      {page === "postcards" && <Postcards />}
+
+      {page === "contact" && <Contact />}
     </>
   );
 }

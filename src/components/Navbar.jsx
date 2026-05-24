@@ -4,14 +4,12 @@ import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 export default function Navbar({ page, setPage }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Close menu on resize to desktop
   useEffect(() => {
     const close = () => { if (window.innerWidth > 768) setMenuOpen(false); };
     window.addEventListener("resize", close);
     return () => window.removeEventListener("resize", close);
   }, []);
 
-  // Prevent scroll when menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -49,6 +47,11 @@ export default function Navbar({ page, setPage }) {
             style={{ color: page === "postcards" ? "var(--plum)" : undefined }}>
             Postcards
           </a>
+          <a className="nav-link" href="#contact"
+            onClick={(e) => { e.preventDefault(); goTo("contact"); }}
+            style={{ color: page === "contact" ? "var(--rose)" : undefined }}>
+            Contact
+          </a>
           <div className="nav-icons">
             <a href="https://github.com/tasha404" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
             <a href="https://www.linkedin.com/in/ntashanadia" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
@@ -56,7 +59,7 @@ export default function Navbar({ page, setPage }) {
           </div>
         </div>
 
-        {/* Hamburger button */}
+        {/* Hamburger */}
         <button
           className={`nav-hamburger${menuOpen ? " open" : ""}`}
           onClick={() => setMenuOpen((o) => !o)}
@@ -78,6 +81,12 @@ export default function Navbar({ page, setPage }) {
             style={{ color: page === "postcards" ? "var(--rose)" : undefined }}>
             Postcards
           </a>
+          <a className="nav-drawer-link"
+            onClick={() => goTo("contact")}
+            href="#contact"
+            style={{ color: page === "contact" ? "var(--rose)" : undefined }}>
+            Contact
+          </a>
         </div>
         <div className="nav-drawer-icons">
           <a href="https://github.com/tasha404" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
@@ -86,7 +95,6 @@ export default function Navbar({ page, setPage }) {
         </div>
       </div>
 
-      {/* Overlay */}
       {menuOpen && <div className="nav-overlay" onClick={() => setMenuOpen(false)} />}
     </>
   );
