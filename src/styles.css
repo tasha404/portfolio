@@ -815,54 +815,27 @@ img {
     transform: scale(1) rotate(0deg);
 }
 
-/* ─── TECH STACK ─── */
+/* ─── TECH STACK — COLLAGE BOARD ─── */
+/* Replace your existing .tech-section styles with these */
+
 .tech-section {
-    background: #ede5d8;
-    padding: 110px 56px;
-    border-top: 1.5px solid var(--border2);
+    padding: 110px 56px 130px;
     position: relative;
     overflow: hidden;
-}
-
-/* faint diagonal lines for texture */
-.tech-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: repeating-linear-gradient(-45deg,
-            transparent, transparent 30px,
-            rgba(201, 160, 154, 0.04) 30px, rgba(201, 160, 154, 0.04) 31px);
-    pointer-events: none;
+    border-top: 1.5px solid var(--border);
 }
 
 .tech-header {
-    text-align: center;
-    margin-bottom: 56px;
+    margin-bottom: 70px;
     position: relative;
     z-index: 2;
 }
 
-.tech-header .section-label {
-    justify-content: center;
-}
-
-.tech-header .section-label::before {
-    display: none;
-}
-
-.tech-header .section-label::after {
-    content: '';
-    display: block;
-    width: 20px;
-    height: 1px;
-    background: var(--rose-lt);
-}
-
 .tech-title {
     font-family: var(--serif);
-    font-size: clamp(38px, 4.5vw, 60px);
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.05;
     color: var(--ink);
-    line-height: 1;
 }
 
 .tech-title em {
@@ -870,69 +843,253 @@ img {
     color: var(--rose);
 }
 
-.tech-grid-wrap {
+/* ── Collage board ── */
+.collage-board {
     position: relative;
+    width: 100%;
+    min-height: 520px;
     z-index: 2;
-    max-width: 860px;
-    margin: 0 auto;
 }
 
-.tech-categories {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
+/* faint "tools" word in background */
+.collage-bg-text {
+    position: absolute;
+    bottom: 10px;
+    right: -10px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(90px, 12vw, 150px);
+    color: rgba(168, 94, 88, 0.055);
+    pointer-events: none;
+    z-index: 0;
+    line-height: 1;
+    user-select: none;
 }
 
-.tech-category {
-    background: #fffcf8;
-    border: 1.5px solid var(--border2);
-    border-radius: 4px;
-    padding: 22px 18px;
-    transition: transform 0.25s, box-shadow 0.25s;
+/* decorative vertical line like a notebook margin */
+.collage-rule {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 38%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--rose-lt), transparent);
+    opacity: 0.4;
+    z-index: 0;
 }
 
-.tech-category:hover {
-    transform: translateY(-3px);
-    box-shadow: 3px 3px 0 var(--rose-lt);
+/* handwritten-feel annotations */
+.collage-note {
+    position: absolute;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--dimmed);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    z-index: 1;
 }
 
-.tech-category-label {
+.collage-note-top {
+    top: 6px;
+    left: 42%;
+    transform: rotate(-3deg);
+}
+
+.collage-note-bottom {
+    bottom: 40px;
+    left: 5%;
+    transform: rotate(2deg);
+}
+
+.collage-byline {
+    position: absolute;
+    bottom: 38px;
+    right: 4%;
     font-family: var(--mono);
     font-size: 9px;
     font-weight: 300;
-    letter-spacing: 0.28em;
+    font-style: italic;
+    color: var(--dimmed);
+    letter-spacing: 0.12em;
+    transform: rotate(-3deg);
+    z-index: 1;
+}
+
+/* ── Sticky card ── */
+.sticky {
+    position: absolute;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    padding: 18px 20px 22px;
+    box-shadow:
+        3px 4px 0 rgba(110, 48, 42, 0.1),
+        6px 10px 22px rgba(20, 14, 12, 0.07);
+    transition:
+        transform 0.28s ease,
+        box-shadow 0.28s ease,
+        opacity 0.6s ease,
+        translate 0.6s ease;
+    opacity: 0;
+    translate: 0 20px;
+}
+
+.sticky.visible {
+    opacity: 1;
+    translate: 0 0;
+}
+
+.sticky:hover {
+    box-shadow:
+        4px 6px 0 rgba(110, 48, 42, 0.16),
+        8px 14px 30px rgba(20, 14, 12, 0.12);
+    z-index: 20 !important;
+}
+
+/* ── Tape attachment ── */
+.sticky-tape {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 56px;
+    height: 18px;
+    background: rgba(212, 160, 154, 0.32);
+    border-top: 1px solid rgba(168, 94, 88, 0.14);
+    border-bottom: 1px solid rgba(168, 94, 88, 0.14);
+    z-index: 5;
+}
+
+/* ── Pushpin ── */
+.sticky-pin {
+    position: absolute;
+    top: -9px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid rgba(110, 48, 42, 0.35);
+    z-index: 5;
+}
+
+.pin-left {
+    left: 20px;
+}
+
+.pin-right {
+    right: 20px;
+}
+
+.pin-center {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.pin-rose {
+    background: var(--rose-lt);
+}
+
+.pin-cream {
+    background: var(--cream);
+}
+
+.pin-slate {
+    background: #b8ccdc;
+}
+
+.pin-ink {
+    background: var(--dimmed);
+}
+
+/* ── Category label inside sticky ── */
+.sticky-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--rose);
-    margin-bottom: 14px;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rose-lt);
 }
 
-.tech-icons-group {
+/* ── Pills ── */
+.sticky-pills {
     display: flex;
     flex-wrap: wrap;
-    gap: 7px;
+    gap: 6px;
 }
 
-.tech-pill {
+.sticky-pill {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    background: #ede5d8;
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    padding: 5px 10px;
     font-family: var(--mono);
     font-size: 10px;
-    font-weight: 400;
-    color: #3a2e2a;
-    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    background: rgba(168, 94, 88, 0.07);
+    border: 1px solid rgba(168, 94, 88, 0.18);
+    padding: 5px 10px;
+    border-radius: 2px;
 }
 
-.tech-pill:hover {
+.pill-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
     background: var(--rose-lt);
-    color: var(--rose-dk);
-    border-color: var(--rose-lt);
+    flex-shrink: 0;
+}
+
+/* ─── RESPONSIVE — TECH STACK ─── */
+@media (max-width: 900px) {
+    .tech-section {
+        padding: 72px 24px 90px;
+    }
+
+    .collage-board {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        min-height: unset;
+    }
+
+    /* On mobile, stack the stickies naturally instead of absolute */
+    .sticky {
+        position: relative !important;
+        left: unset !important;
+        right: unset !important;
+        top: unset !important;
+        width: 100% !important;
+        max-width: 420px;
+        transform: rotate(0deg) !important;
+        margin: 0 auto;
+    }
+
+    .sticky:nth-child(even) {
+        transform: rotate(0.8deg) !important;
+    }
+
+    .sticky:nth-child(odd) {
+        transform: rotate(-0.8deg) !important;
+    }
+
+    .collage-rule,
+    .collage-note,
+    .collage-byline,
+    .collage-bg-text {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .tech-section {
+        padding: 60px 18px 70px;
+    }
 }
 
 /* ─── POSTCARDS ─── */
