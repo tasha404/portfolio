@@ -1,15 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import { db } from "../firebase";
 import {
-  collection, doc, setDoc, deleteDoc,
-  onSnapshot, query, where,
+  collection, addDoc, deleteDoc, doc,
+  onSnapshot, query, where, orderBy,
 } from "firebase/firestore";
 import {
   getStorage, ref as storageRef,
   uploadBytesResumable, getDownloadURL, deleteObject,
 } from "firebase/storage";
 
-const ADMIN_PASSWORD = "tasha404"; 
+const ADMIN_PASSWORD = "tasha404"; // change this!
 
 const MONTHS = [
   "January","February","March","April","May","June",
@@ -31,53 +31,116 @@ function today() {
   return { year: d.getFullYear(), month: d.getMonth(), day: d.getDate() };
 }
 
-function DayCell({ day, year, month, entry, isToday, isAdmin, onAdd, onView }) {
-  const key = dateKey(year, month, day);
-  const hasPhoto = !!entry?.url;
+/* ── Day cell ─────────────────────────────────────────── */
+function DayCell({ day, photos, isToday, isAdmin, onOpen }) {
+  const hasPhotos = photos.length > 0;
+  const first = photos[0];
 
   return (
     <div
-      className={`cal-day ${isToday ? "cal-day-today" : ""} ${hasPhoto ? "cal-day-has-photo" : ""}`}
-      onClick={() => hasPhoto ? onView(entry) : isAdmin && onAdd(key)}
-      title={hasPhoto ? entry.caption || "click to view" : isAdmin ? "click to add photo" : ""}
+      className={`cal-day ${isToday ? "cal-day-today" : ""} ${hasPhotos ? "cal-day-has-photo" : ""}`}
+      onClick={() => (hasPhotos || isAdmin) && onOpen()}
+      title={hasPhotos ? `${photos.length} photo${photos.length > 1 ? "s" : ""}` : isAdmin ? "click to add photo" : ""}
     >
       <span className="cal-day-num">{day}</span>
-      {hasPhoto && (
+
+      {hasPhotos && (
         <div className="cal-day-thumb-wrap">
-          <img src={entry.url} alt={entry.caption || key} className="cal-day-thumb" loading="lazy" />
+          <img src={first.url} alt="" className="cal-day-thumb" loading="lazy" />
           <div className="cal-day-thumb-overlay" />
+          {photos.length > 1 && (
+            <span className="cal-day-count">+{photos.length}</span>
+          )}
         </div>
       )}
-      {!hasPhoto && isAdmin && (
+
+      {!hasPhotos && isAdmin && (
         <span className="cal-day-add">+</span>
       )}
     </div>
   );
 }
 
-function Lightbox({ entry, onClose, isAdmin, onDelete }) {
+/* ── Gallery lightbox ─────────────────────────────────── */
+function Gallery({ date, photos, isAdmin, onClose, onAdd, onDelete }) {
+  const [idx, setIdx] = useState(0);
+  // derive safe index without setState in effect
+  const safeIdx = photos.length === 0 ? 0 : Math.min(idx, photos.length - 1);
+  const current = photos[safeIdx];
+
   useEffect(() => {
-    function onKey(e) { if (e.key === "Escape") onClose(); }
+    function onKey(e) {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowRight") setIdx(i => Math.min(i + 1, photos.length - 1));
+      if (e.key === "ArrowLeft")  setIdx(i => Math.max(i - 1, 0));
+    }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
+  }, [onClose, photos.length]);
 
   return (
     <div className="lb-overlay" onClick={onClose}>
-      <div className="lb-window" onClick={e => e.stopPropagation()}>
+      <div className="gallery-window" onClick={e => e.stopPropagation()}>
         <button className="lb-close" onClick={onClose}>×</button>
-        <div className="lb-img-wrap">
-          <img src={entry.url} alt={entry.caption || entry.date} className="lb-img" />
+
+        {/* date + add button */}
+        <div className="gallery-header">
+          <span className="lb-date">{date}</span>
+          <div style={{ display:"flex", alignItems:"center", gap:12 }}>
+            <span className="gallery-counter">
+              {photos.length > 0 ? `${safeIdx + 1} / ${photos.length}` : "no photos"}
+            </span>
+            {isAdmin && (
+              <button className="gallery-add-btn" onClick={onAdd}>+ add photo</button>
+            )}
+          </div>
         </div>
-        <div className="lb-meta">
-          <span className="lb-date">{entry.date}</span>
-          {entry.caption && <p className="lb-caption">{entry.caption}</p>}
-          {isAdmin && (
-            <button className="lb-delete" onClick={() => onDelete(entry)}>
-              delete photo
-            </button>
-          )}
-        </div>
+
+        {photos.length === 0 ? (
+          <div className="gallery-empty">
+            <span>📷</span>
+            <p>no photos yet — click "add photo" to upload one</p>
+          </div>
+        ) : (
+          <>
+            {/* main image */}
+            <div className="gallery-img-wrap">
+              {safeIdx > 0 && (
+                <button className="gallery-arrow gallery-arrow-left" onClick={() => setIdx(i => i - 1)}>‹</button>
+              )}
+              <img src={current.url} alt={current.caption || date} className="gallery-img" />
+              {safeIdx < photos.length - 1 && (
+                <button className="gallery-arrow gallery-arrow-right" onClick={() => setIdx(i => i + 1)}>›</button>
+              )}
+            </div>
+
+            {/* caption + delete */}
+            <div className="gallery-meta">
+              {current.caption && <p className="lb-caption">{current.caption}</p>}
+              {isAdmin && (
+                <button className="lb-delete" onClick={() => onDelete(current)}>
+                  delete this photo
+                </button>
+              )}
+            </div>
+
+            {/* thumbnail strip */}
+            {photos.length > 1 && (
+              <div className="gallery-strip">
+                {photos.map((p, i) => (
+                  <div
+                    key={p.id}
+                    className={`gallery-strip-thumb ${i === safeIdx ? "active" : ""}`}
+                    onClick={() => setIdx(i)}
+                  >
+                    <img src={p.url} alt="" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
+        )}
+
         <div className="lb-tape lb-tape-tl" />
         <div className="lb-tape lb-tape-tr" />
       </div>
@@ -85,51 +148,58 @@ function Lightbox({ entry, onClose, isAdmin, onDelete }) {
   );
 }
 
+/* ── Upload modal ─────────────────────────────────────── */
 function UploadModal({ dateKey, onClose }) {
-  const [file, setFile] = useState(null);
-  const [preview, setPreview] = useState(null);
+  const [files, setFiles] = useState([]);
+  const [previews, setPreviews] = useState([]);
   const [caption, setCaption] = useState("");
   const [progress, setProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
   const inputRef = useRef(null);
 
-  function pickFile(e) {
-    const f = e.target.files[0];
-    if (!f) return;
-    if (f.size > 10 * 1024 * 1024) { setError("Max file size is 10 MB"); return; }
-    setFile(f);
-    setPreview(URL.createObjectURL(f));
+  function pickFiles(e) {
+    const picked = Array.from(e.target.files);
+    if (!picked.length) return;
+    const tooBig = picked.find(f => f.size > 10 * 1024 * 1024);
+    if (tooBig) { setError("Each file must be under 10 MB"); return; }
+    setFiles(picked);
+    setPreviews(picked.map(f => URL.createObjectURL(f)));
     setError("");
   }
 
   async function handleUpload() {
-    if (!file) { setError("Pick a photo first!"); return; }
+    if (!files.length) { setError("Pick at least one photo!"); return; }
     setUploading(true);
     setError("");
+
     try {
       const storage = getStorage();
-      const path = `calendar/${dateKey}_${Date.now()}`;
-      const sRef = storageRef(storage, path);
-      const task = uploadBytesResumable(sRef, file);
+      for (let i = 0; i < files.length; i++) {
+        const f = files[i];
+        const path = `calendar/${dateKey}_${Date.now()}_${i}`;
+        const sRef = storageRef(storage, path);
+        const task = uploadBytesResumable(sRef, f);
 
-      await new Promise((resolve, reject) => {
-        task.on("state_changed",
-          snap => setProgress(Math.round((snap.bytesTransferred / snap.totalBytes) * 100)),
-          reject,
-          resolve
-        );
-      });
+        await new Promise((resolve, reject) => {
+          task.on("state_changed",
+            snap => {
+              const fileProgress = (snap.bytesTransferred / snap.totalBytes) * 100;
+              setProgress(Math.round(((i) / files.length) * 100 + fileProgress / files.length));
+            },
+            reject, resolve
+          );
+        });
 
-      const url = await getDownloadURL(sRef);
-      await setDoc(doc(db, "calendar", dateKey), {
-        date: dateKey,
-        url,
-        storagePath: path,
-        caption: caption.trim(),
-        updatedAt: new Date().toISOString(),
-      });
-
+        const url = await getDownloadURL(sRef);
+        await addDoc(collection(db, "calendarPhotos"), {
+          date: dateKey,
+          url,
+          storagePath: path,
+          caption: caption.trim(),
+          createdAt: new Date().toISOString(),
+        });
+      }
       onClose();
     } catch (err) {
       setError("Upload failed — try again.");
@@ -143,27 +213,43 @@ function UploadModal({ dateKey, onClose }) {
       <div className="upload-window" onClick={e => e.stopPropagation()}>
         <button className="lb-close" onClick={onClose}>×</button>
         <h2 className="upload-title">
-          add a photo <span className="upload-date-tag">{dateKey}</span>
+          add photos <span className="upload-date-tag">{dateKey}</span>
         </h2>
 
         <div
-          className={`upload-drop ${preview ? "upload-drop-has-preview" : ""}`}
+          className={`upload-drop ${previews.length ? "upload-drop-has-preview" : ""}`}
           onClick={() => inputRef.current?.click()}
         >
-          {preview
-            ? <img src={preview} alt="preview" className="upload-preview" />
-            : <>
-                <span className="upload-drop-icon">✉︎</span>
-                <span className="upload-drop-hint">click to pick a photo</span>
-                <span className="upload-drop-sub">jpg, png, webp · max 10 MB</span>
-              </>
-          }
-          <input ref={inputRef} type="file" accept="image/*" onChange={pickFile} style={{ display:"none" }} />
+          {previews.length > 0 ? (
+            <div className="upload-preview-grid">
+              {previews.map((p, i) => (
+                <img key={i} src={p} alt="" className="upload-preview-thumb" />
+              ))}
+            </div>
+          ) : (
+            <>
+              <span className="upload-drop-icon">📷</span>
+              <span className="upload-drop-hint">click to pick photos</span>
+              <span className="upload-drop-sub">select multiple · jpg, png, webp · max 10 MB each</span>
+            </>
+          )}
+          <input
+            ref={inputRef}
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={pickFiles}
+            style={{ display:"none" }}
+          />
         </div>
+
+        {previews.length > 0 && (
+          <p className="upload-file-count">{files.length} photo{files.length > 1 ? "s" : ""} selected</p>
+        )}
 
         <div className="upload-caption-wrap">
           <label className="upload-caption-label">
-            caption <span style={{ opacity: 0.4 }}>(optional)</span>
+            caption <span style={{ opacity:0.4 }}>(optional — applies to all)</span>
           </label>
           <input
             className="upload-caption-input"
@@ -177,7 +263,7 @@ function UploadModal({ dateKey, onClose }) {
 
         {uploading && (
           <div className="upload-progress-wrap">
-            <div className="upload-progress-bar" style={{ width: `${progress}%` }} />
+            <div className="upload-progress-bar" style={{ width:`${progress}%` }} />
             <span className="upload-progress-label">{progress}%</span>
           </div>
         )}
@@ -186,8 +272,8 @@ function UploadModal({ dateKey, onClose }) {
 
         <div className="upload-actions">
           <button className="upload-cancel" onClick={onClose} disabled={uploading}>cancel</button>
-          <button className="upload-submit" onClick={handleUpload} disabled={uploading || !file}>
-            {uploading ? "uploading..." : "save photo →"}
+          <button className="upload-submit" onClick={handleUpload} disabled={uploading || !files.length}>
+            {uploading ? `uploading... ${progress}%` : `upload ${files.length > 1 ? files.length + " photos" : "photo"} →`}
           </button>
         </div>
       </div>
@@ -195,6 +281,7 @@ function UploadModal({ dateKey, onClose }) {
   );
 }
 
+/* ── Admin gate ───────────────────────────────────────── */
 function AdminGate({ onUnlock }) {
   const [pw, setPw] = useState("");
   const [shake, setShake] = useState(false);
@@ -211,10 +298,10 @@ function AdminGate({ onUnlock }) {
   }
 
   return (
-    <div className="lb-overlay" onClick={() => {}}>
+    <div className="lb-overlay">
       <div className={`admin-gate ${shake ? "admin-gate-shake" : ""}`}>
-        <span className="admin-gate-icon">🔒︎</span>
-        <p className="admin-gate-label">only tasha can enter</p>
+        <span className="admin-gate-icon">🔒</span>
+        <p className="admin-gate-label">admin password</p>
         <input
           className="admin-gate-input"
           type="password"
@@ -230,38 +317,46 @@ function AdminGate({ onUnlock }) {
   );
 }
 
+/* ── Main page ────────────────────────────────────────── */
 export default function CalendarPage() {
   const now = today();
-  const [year, setYear]     = useState(now.year);
-  const [month, setMonth]   = useState(now.month);
-  const [entries, setEntries] = useState({});
-  const [lightbox, setLightbox] = useState(null);
-  const [uploadKey, setUploadKey] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(() => sessionStorage.getItem("cal_admin") === "1");
+  const [year, setYear]   = useState(now.year);
+  const [month, setMonth] = useState(now.month);
+  // photos grouped by date key: { "2025-05-03": [{id, url, caption, ...}] }
+  const [photoMap, setPhotoMap] = useState({});
+  const [openDay, setOpenDay]   = useState(null); // dateKey string
+  const [uploadDay, setUploadDay] = useState(null);
+  const [isAdmin, setIsAdmin]   = useState(() => sessionStorage.getItem("cal_admin") === "1");
   const [showGate, setShowGate] = useState(false);
 
+  /* listen to this month's photos */
   useEffect(() => {
     const prefix = `${year}-${String(month + 1).padStart(2,"0")}`;
     const q = query(
-      collection(db, "calendar"),
+      collection(db, "calendarPhotos"),
       where("date", ">=", prefix + "-01"),
-      where("date", "<=", prefix + "-31")
+      where("date", "<=", prefix + "-31"),
+      orderBy("date"),
+      orderBy("createdAt"),
     );
     const unsub = onSnapshot(q, snap => {
       const map = {};
-      snap.docs.forEach(d => { map[d.id] = d.data(); });
-      setEntries(map);
+      snap.docs.forEach(d => {
+        const data = { id: d.id, ...d.data() };
+        if (!map[data.date]) map[data.date] = [];
+        map[data.date].push(data);
+      });
+      setPhotoMap(map);
     });
     return () => unsub();
   }, [year, month]);
 
-  async function handleDelete(entry) {
+  async function handleDelete(photo) {
     if (!window.confirm("Delete this photo?")) return;
     try {
       const storage = getStorage();
-      if (entry.storagePath) await deleteObject(storageRef(storage, entry.storagePath));
-      await deleteDoc(doc(db, "calendar", entry.date));
-      setLightbox(null);
+      if (photo.storagePath) await deleteObject(storageRef(storage, photo.storagePath));
+      await deleteDoc(doc(db, "calendarPhotos", photo.id));
     } catch (err) {
       console.error("Delete failed", err);
     }
@@ -282,6 +377,8 @@ export default function CalendarPage() {
     else setMonth(m => m + 1);
   }
 
+  const totalPhotos = Object.values(photoMap).reduce((acc, arr) => acc + arr.length, 0);
+
   return (
     <div className="cal-page-wrapper">
       <div className="cal-page">
@@ -289,12 +386,12 @@ export default function CalendarPage() {
         {/* header */}
         <div className="cal-page-header">
           <div>
-            <p className="section-label" style={{ justifyContent: "flex-start" }}>photo diary</p>
+            <p className="section-label" style={{ justifyContent:"flex-start" }}>photo diary</p>
             <h1 className="cal-page-title">Daily <em>Snaps</em></h1>
             <p className="cal-page-sub">little moments, month by month ✦</p>
           </div>
           {!isAdmin
-            ? <button className="cal-admin-btn" onClick={() => setShowGate(true)}>admin</button>
+            ? <button className="cal-admin-btn" onClick={() => setShowGate(true)}>🔒 admin</button>
             : <button className="cal-admin-btn cal-admin-btn-active" onClick={() => {
                 sessionStorage.removeItem("cal_admin");
                 setIsAdmin(false);
@@ -327,19 +424,18 @@ export default function CalendarPage() {
                   day={day}
                   year={year}
                   month={month}
-                  entry={entries[dateKey(year, month, day)]}
+                  photos={photoMap[dateKey(year, month, day)] || []}
                   isToday={year === now.year && month === now.month && day === now.day}
                   isAdmin={isAdmin}
-                  onAdd={key => setUploadKey(key)}
-                  onView={entry => setLightbox(entry)}
+                  onOpen={() => setOpenDay(dateKey(year, month, day))}
                 />
           )}
         </div>
 
         {/* strip */}
         <div className="cal-strip">
-          <span>{Object.keys(entries).length} photo{Object.keys(entries).length !== 1 ? "s" : ""} this month</span>
-          {isAdmin && <span className="cal-strip-hint">click any day to add a photo</span>}
+          <span>{totalPhotos} photo{totalPhotos !== 1 ? "s" : ""} this month</span>
+          {isAdmin && <span className="cal-strip-hint">click any day to add photos</span>}
         </div>
 
       </div>
@@ -348,15 +444,22 @@ export default function CalendarPage() {
       {showGate && !isAdmin && (
         <AdminGate onUnlock={() => { setIsAdmin(true); setShowGate(false); }} />
       )}
-      {uploadKey && (
-        <UploadModal dateKey={uploadKey} onClose={() => setUploadKey(null)} />
-      )}
-      {lightbox && (
-        <Lightbox
-          entry={lightbox}
-          onClose={() => setLightbox(null)}
+
+      {openDay && (
+        <Gallery
+          date={openDay}
+          photos={photoMap[openDay] || []}
           isAdmin={isAdmin}
+          onClose={() => setOpenDay(null)}
+          onAdd={() => { setUploadDay(openDay); setOpenDay(null); }}
           onDelete={handleDelete}
+        />
+      )}
+
+      {uploadDay && (
+        <UploadModal
+          dateKey={uploadDay}
+          onClose={() => { setUploadDay(null); setOpenDay(uploadDay); }}
         />
       )}
     </div>
