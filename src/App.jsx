@@ -2,12 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
-import Projects from "./components/Projects";       // ← enhanced version
+import Projects from "./components/Projects";
 import TechStack from "./components/TechStack";
-import Terminal from "./components/Terminal";         // ← NEW
-import EasterEggs from "./components/EasterEggs";    // ← NEW
+import Terminal from "./components/Terminal";
+import EasterEggs from "./components/EasterEggs";
 import Postcards from "./pages/Postcards";
 import Contact from "./pages/Contact";
+import CalendarPage from "./pages/Calendar";
 
 function Cursor() {
   const dot = useRef(null);
@@ -29,7 +30,7 @@ export default function App() {
   return (
     <>
       <Cursor />
-      <EasterEggs />     
+      <EasterEggs />
       <Navbar page={page} setPage={setPage} />
 
       {page === "home" && (
@@ -39,15 +40,10 @@ export default function App() {
           <Projects />
           <TechStack />
           <footer>
-            {/* "© 2026" is a hidden easter egg trigger */}
             <span className="footer-copy">
               © 2026 — All rights reserved
               {" · "}
-              <span
-                className="footer-secret"
-                data-easter-egg="labs"
-                title="👀"
-              >
+              <span className="footer-secret" data-easter-egg="labs" title="👀">
                 404
               </span>
             </span>
@@ -57,8 +53,8 @@ export default function App() {
 
       {page === "postcards" && <Postcards />}
       {page === "contact" && <Contact />}
+      {page === "calendar" && <CalendarPage />}
 
-      {/* Terminal floats on every page */}
       <Terminal />
     </>
   );

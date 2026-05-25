@@ -47,6 +47,11 @@ export default function Navbar({ page, setPage }) {
             style={{ color: page === "postcards" ? "var(--plum)" : undefined }}>
             Postcards
           </a>
+          <a className="nav-link" href="#diary"
+            onClick={(e) => { e.preventDefault(); goTo("calendar"); }}
+            style={{ color: page === "calendar" ? "var(--rose)" : undefined }}>
+            Diary
+          </a>
           <a className="nav-link" href="#contact"
             onClick={(e) => { e.preventDefault(); goTo("contact"); }}
             style={{ color: page === "contact" ? "var(--rose)" : undefined }}>
@@ -80,6 +85,12 @@ export default function Navbar({ page, setPage }) {
             href="#postcards"
             style={{ color: page === "postcards" ? "var(--rose)" : undefined }}>
             Postcards
+          </a>
+          <a className="nav-drawer-link"
+            onClick={() => goTo("calendar")}
+            href="#diary"
+            style={{ color: page === "calendar" ? "var(--rose)" : undefined }}>
+            Diary
           </a>
           <a className="nav-drawer-link"
             onClick={() => goTo("contact")}
