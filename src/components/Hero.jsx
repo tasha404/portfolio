@@ -18,17 +18,13 @@ export default function Hero() {
         <a href="#projects" className="hero-cta">
           See my work <span className="hero-cta-arrow">→</span>
         </a>
-        <div className="hero-scroll">
-          <span className="scroll-line" />
-          scroll to explore
-        </div>
       </div>
 
       <div className="hero-right">
         <div className="hero-image-frame">
-          <img src="/images/hero.png" alt="Natasha Nadia" />
+          <img src="/images/hero2.png" alt="Natasha Nadia" />
           <span className="hero-tag hero-tag-1">Web Developer</span>
-          <span className="hero-tag hero-tag-2">AI &amp; CV</span>
+          <span className="hero-tag hero-tag-2">AI &amp; VBA</span>
         </div>
       </div>
     </section>
