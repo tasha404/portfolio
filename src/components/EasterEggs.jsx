@@ -12,7 +12,6 @@ function LabsPage({ onClose }) {
       <div className="labs-window">
         <button className="labs-close" onClick={onClose} aria-label="Close">×</button>
         <div className="labs-header">
-          <div className="labs-badge">CLASSIFIED</div>
           <h1 className="labs-title">
             <span className="labs-title-num">404</span>
             <span className="labs-title-word">Labs</span>

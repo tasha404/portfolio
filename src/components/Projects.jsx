@@ -206,7 +206,7 @@ export default function Projects() {
     <section className="projects" id="projects" ref={sectionRef}>
       <div className="projects-header fade-up">
         <div>
-          <p className="section-label">Selected work</p>
+          
           <h2>My <em>Projects</em></h2>
         </div>
         <span className="projects-count">{projects.length} projects</span>

@@ -39,21 +39,22 @@ export default function App() {
           <About />
           <Projects />
           <TechStack />
-          <footer>
-            <span className="footer-copy">
-              © 2026 — All rights reserved
-              {" · "}
-              <span className="footer-secret" data-easter-egg="labs" title="👀">
-                404
-              </span>
-            </span>
-          </footer>
         </>
       )}
 
       {page === "postcards" && <Postcards />}
       {page === "contact" && <Contact />}
       {page === "calendar" && <CalendarPage />}
+
+      <footer>
+        <span className="footer-copy">
+          © 2026 — All rights reserved
+          {" · "}
+          <span className="footer-secret" data-easter-egg="labs" title="👀">
+            404
+          </span>
+        </span>
+      </footer>
 
       <Terminal />
     </>

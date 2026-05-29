@@ -209,7 +209,7 @@ img {
 
 .section-label::before {
     content: '';
-    display: block;
+    display: none;
     width: 20px;
     height: 1px;
     background: var(--hot);
@@ -1465,7 +1465,7 @@ img {
 
 /* ─── FOOTER ─── */
 footer {
-    background: var(--ink);
+    background: #f7d8e5;
     border-top: 1.5px solid rgba(255, 10, 84, 0.3);
     padding: 36px 56px;
     display: flex;
@@ -1477,14 +1477,14 @@ footer {
     font-family: var(--display);
     font-size: 18px;
     font-style: italic;
-    color: var(--paper);
+    color: var(--ink);
 }
 
 .footer-copy {
     font-family: var(--body);
     font-size: 10px;
     font-weight: 400;
-    color: rgba(255, 229, 236, 0.35);
+    color: var(--ink);
     letter-spacing: 0.12em;
 }
 

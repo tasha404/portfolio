@@ -9,7 +9,7 @@ import {
   uploadBytesResumable, getDownloadURL, deleteObject,
 } from "firebase/storage";
 
-const ADMIN_PASSWORD = "tasha404"; // change this!
+const ADMIN_PASSWORD = "canna"; 
 
 const MONTHS = [
   "January","February","March","April","May","June",
@@ -300,8 +300,8 @@ function AdminGate({ onUnlock }) {
   return (
     <div className="lb-overlay">
       <div className={`admin-gate ${shake ? "admin-gate-shake" : ""}`}>
-        <span className="admin-gate-icon">🔒</span>
-        <p className="admin-gate-label">admin password</p>
+        <span className="admin-gate-icon">🔒︎</span>
+        <p className="admin-gate-label">i doubt u know it</p>
         <input
           className="admin-gate-input"
           type="password"
@@ -386,16 +386,16 @@ export default function CalendarPage() {
         {/* header */}
         <div className="cal-page-header">
           <div>
-            <p className="section-label" style={{ justifyContent:"flex-start" }}>photo diary</p>
+          
             <h1 className="cal-page-title">Daily <em>Snaps</em></h1>
-            <p className="cal-page-sub">little moments, month by month ✦</p>
+            <p className="cal-page-sub">little moments, month by month </p>
           </div>
           {!isAdmin
-            ? <button className="cal-admin-btn" onClick={() => setShowGate(true)}>🔒 admin</button>
+            ? <button className="cal-admin-btn" onClick={() => setShowGate(true)}>tasha</button>
             : <button className="cal-admin-btn cal-admin-btn-active" onClick={() => {
                 sessionStorage.removeItem("cal_admin");
                 setIsAdmin(false);
-              }}>✓ admin mode</button>
+              }}>tasha's here</button>
           }
         </div>
 

@@ -67,7 +67,7 @@ async function handleSubmit(e) {
     <div className="contact-page">
       {/* left panel */}
       <div className="contact-left">
-        <p className="section-label">Get in touch</p>
+
         <h1 className="contact-headline">
           Let's build<br />
           <em>something</em><br />

@@ -24,7 +24,7 @@ export default function About() {
   return (
     <section className="about" id="about" ref={ref}>
       <div className="about-left">
-        <p className="section-label">About me</p>
+     
         <h2 className="about-headline fade-up">Hello,<br />I'm <em>Natasha!</em></h2>
         <p className="about-body fade-up">
           I'm a Computer Science student driven to build intelligent, scalable,

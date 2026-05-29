@@ -73,7 +73,7 @@ export default function TechStack() {
       <div className="tech-blob tech-blob-2" />
 
       <div className="tech-header">
-        <p className="section-label">Tools I use</p>
+      
         <div className="tech-title">
           Tech <em>Stack</em>
         </div>
