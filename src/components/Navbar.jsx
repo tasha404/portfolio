@@ -32,31 +32,14 @@ export default function Navbar({ page, setPage }) {
           Natasha <span>Nadia</span>
         </div>
 
-        {/* Desktop nav */}
         <div className="nav-right">
-          <a className="nav-link" href="#about"
-            onClick={(e) => { e.preventDefault(); goTo("home", "about"); }}>
-            About
-          </a>
-          <a className="nav-link" href="#projects"
-            onClick={(e) => { e.preventDefault(); goTo("home", "projects"); }}>
-            Projects
-          </a>
-          <a className="nav-link" href="#postcards"
-            onClick={(e) => { e.preventDefault(); goTo("postcards"); }}
-            style={{ color: page === "postcards" ? "var(--plum)" : undefined }}>
-            Postcards
-          </a>
-          <a className="nav-link" href="#diary"
-            onClick={(e) => { e.preventDefault(); goTo("calendar"); }}
-            style={{ color: page === "calendar" ? "var(--rose)" : undefined }}>
-            Diary
-          </a>
-          <a className="nav-link" href="#contact"
-            onClick={(e) => { e.preventDefault(); goTo("contact"); }}
-            style={{ color: page === "contact" ? "var(--rose)" : undefined }}>
-            Contact
-          </a>
+          <a className="nav-link" href="#about" onClick={(e) => { e.preventDefault(); goTo("home", "about"); }}>About</a>
+          <a className="nav-link" href="#projects" onClick={(e) => { e.preventDefault(); goTo("home", "projects"); }}>Projects</a>
+          <a className="nav-link" href="#postcards" onClick={(e) => { e.preventDefault(); goTo("postcards"); }} style={{ color: page === "postcards" ? "var(--hot)" : undefined }}>Postcards</a>
+          <a className="nav-link" href="#diary" onClick={(e) => { e.preventDefault(); goTo("calendar"); }} style={{ color: page === "calendar" ? "var(--hot)" : undefined }}>Diary</a>
+          <a className="nav-link" href="#books" onClick={(e) => { e.preventDefault(); goTo("books"); }} style={{ color: page === "books" ? "var(--hot)" : undefined }}>Books</a>
+          <a className="nav-link" href="#movies" onClick={(e) => { e.preventDefault(); goTo("movies"); }} style={{ color: page === "movies" ? "var(--hot)" : undefined }}>Movies</a>
+          <a className="nav-link" href="#contact" onClick={(e) => { e.preventDefault(); goTo("contact"); }} style={{ color: page === "contact" ? "var(--hot)" : undefined }}>Contact</a>
           <div className="nav-icons">
             <a href="https://github.com/tasha404" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
             <a href="https://www.linkedin.com/in/ntashanadia" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
@@ -64,40 +47,20 @@ export default function Navbar({ page, setPage }) {
           </div>
         </div>
 
-        {/* Hamburger */}
-        <button
-          className={`nav-hamburger${menuOpen ? " open" : ""}`}
-          onClick={() => setMenuOpen((o) => !o)}
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
-        >
+        <button className={`nav-hamburger${menuOpen ? " open" : ""}`} onClick={() => setMenuOpen(o => !o)} aria-label="Toggle menu" aria-expanded={menuOpen}>
           <span /><span /><span />
         </button>
       </nav>
 
-      {/* Mobile drawer */}
       <div className={`nav-drawer${menuOpen ? " open" : ""}`}>
         <div className="nav-drawer-links">
           <a className="nav-drawer-link" onClick={() => goTo("home", "about")} href="#about">About</a>
           <a className="nav-drawer-link" onClick={() => goTo("home", "projects")} href="#projects">Projects</a>
-          <a className="nav-drawer-link"
-            onClick={() => goTo("postcards")}
-            href="#postcards"
-            style={{ color: page === "postcards" ? "var(--rose)" : undefined }}>
-            Postcards
-          </a>
-          <a className="nav-drawer-link"
-            onClick={() => goTo("calendar")}
-            href="#diary"
-            style={{ color: page === "calendar" ? "var(--rose)" : undefined }}>
-            Diary
-          </a>
-          <a className="nav-drawer-link"
-            onClick={() => goTo("contact")}
-            href="#contact"
-            style={{ color: page === "contact" ? "var(--rose)" : undefined }}>
-            Contact
-          </a>
+          <a className="nav-drawer-link" onClick={() => goTo("postcards")} href="#postcards" style={{ color: page === "postcards" ? "var(--hot)" : undefined }}>Postcards</a>
+          <a className="nav-drawer-link" onClick={() => goTo("calendar")} href="#diary" style={{ color: page === "calendar" ? "var(--hot)" : undefined }}>Diary</a>
+          <a className="nav-drawer-link" onClick={() => goTo("books")} href="#books" style={{ color: page === "books" ? "var(--hot)" : undefined }}>Books</a>
+          <a className="nav-drawer-link" onClick={() => goTo("movies")} href="#movies" style={{ color: page === "movies" ? "var(--hot)" : undefined }}>Movies</a>
+          <a className="nav-drawer-link" onClick={() => goTo("contact")} href="#contact" style={{ color: page === "contact" ? "var(--hot)" : undefined }}>Contact</a>
         </div>
         <div className="nav-drawer-icons">
           <a href="https://github.com/tasha404" target="_blank" rel="noopener noreferrer"><FaGithub /></a>

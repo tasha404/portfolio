@@ -4992,3 +4992,695 @@ a.contact-detail-val:hover {
 .admin-gate-btn:hover {
     background: var(--plum);
 }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   TASHA404 — BOOKS & MOVIES
+   Append to bottom of styles.css
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Shared page shell ──────────────────────────────── */
+.media-page-wrapper {
+    background: var(--paper);
+    min-height: 100vh;
+    border-top: 1.5px solid var(--border2);
+}
+
+.media-page {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 120px 32px 120px;
+}
+
+.media-page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.media-page-title {
+    font-family: var(--display);
+    font-size: clamp(42px, 6vw, 72px);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.0;
+    color: var(--ink);
+    margin-bottom: 8px;
+}
+
+.media-page-title em {
+    font-family: var(--accent);
+    font-style: normal;
+    color: var(--hot);
+}
+
+.media-page-sub {
+    font-family: var(--body);
+    font-size: 12px;
+    color: var(--dimmed);
+    letter-spacing: 0.06em;
+}
+
+/* ── Admin + add buttons ────────────────────────────── */
+.media-add-btn {
+    font-family: var(--body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border: 1px solid var(--hot);
+    border-radius: 3px;
+    background: var(--hot);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+}
+
+.media-add-btn:hover {
+    background: var(--plum);
+    border-color: var(--plum);
+}
+
+/* ── Filter tabs ────────────────────────────────────── */
+.media-filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.media-tab {
+    font-family: var(--body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border: 1px solid var(--border2);
+    border-radius: 3px;
+    background: transparent;
+    color: var(--dimmed);
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.media-tab:hover {
+    border-color: var(--hot-lt);
+    color: var(--hot-dk);
+}
+
+.media-tab.active {
+    background: var(--hot);
+    border-color: var(--hot);
+    color: #fff;
+}
+
+.media-tab-count {
+    font-size: 9px;
+    opacity: 0.7;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1px 5px;
+    border-radius: 10px;
+}
+
+.media-tab.active .media-tab-count {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* ── Controls row (movies) ──────────────────────────── */
+.media-controls {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.media-sort {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.media-sort-label {
+    font-family: var(--body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dimmed);
+}
+
+.media-sort-select {
+    font-family: var(--body);
+    font-size: 11px;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--border2);
+    border-radius: 3px;
+    padding: 6px 28px 6px 10px;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237a5a72' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    transition: border-color 0.15s;
+}
+
+.media-sort-select:focus {
+    border-color: var(--hot);
+}
+
+/* ── Stars ──────────────────────────────────────────── */
+.media-stars {
+    font-size: 12px;
+    color: var(--hot);
+    letter-spacing: 1px;
+    font-family: sans-serif;
+}
+
+.media-stars-lg {
+    font-size: 18px;
+}
+
+.media-rating-num {
+    font-family: var(--body);
+    font-size: 12px;
+    color: var(--dimmed);
+    font-weight: 400;
+    letter-spacing: 0;
+    margin-left: 4px;
+}
+
+/* ── Empty state ────────────────────────────────────── */
+.media-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 80px 0;
+    font-family: var(--display);
+    font-style: italic;
+    color: var(--dimmed);
+    font-size: 18px;
+}
+
+.media-empty span {
+    font-size: 40px;
+}
+
+/* ── Add modal ──────────────────────────────────────── */
+.media-modal {
+    background: var(--paper);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    max-width: 560px;
+    width: 100%;
+    padding: 32px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: lb-slide 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.media-modal-title {
+    font-family: var(--display);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 24px;
+}
+
+.media-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.media-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.media-form-full {
+    grid-column: span 2;
+}
+
+.media-form-field label {
+    font-family: var(--body);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--hot);
+}
+
+.media-form-field input,
+.media-form-field select,
+.media-form-field textarea {
+    font-family: var(--body);
+    font-size: 13px;
+    color: var(--ink);
+    background: var(--blush);
+    border: 1px solid var(--border2);
+    border-radius: 3px;
+    padding: 9px 12px;
+    outline: none;
+    transition: border-color 0.15s;
+    resize: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.media-form-field input:focus,
+.media-form-field select:focus,
+.media-form-field textarea:focus {
+    border-color: var(--hot);
+}
+
+.media-form-hint {
+    font-family: var(--body);
+    font-size: 10px;
+    color: var(--dimmed);
+    font-style: italic;
+}
+
+/* ── Delete button ──────────────────────────────────── */
+.media-delete-btn {
+    font-family: var(--body);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--plum);
+    background: none;
+    border: 1px solid rgba(134, 22, 87, 0.3);
+    border-radius: 2px;
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-top: 8px;
+}
+
+.media-delete-btn:hover {
+    background: rgba(134, 22, 87, 0.08);
+}
+
+/* ═══════════════════════════════════════════════════
+   BOOKS
+   ═══════════════════════════════════════════════════ */
+
+.books-section {
+    margin-bottom: 56px;
+}
+
+.books-year-label {
+    font-family: var(--display);
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.book-card {
+    display: flex;
+    gap: 16px;
+    background: #fff8fa;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+
+.book-card:hover {
+    border-color: var(--hot-lt);
+    box-shadow: 0 6px 24px rgba(255, 10, 84, 0.08);
+    transform: translateY(-2px);
+}
+
+.book-cover {
+    width: 72px;
+    flex-shrink: 0;
+    aspect-ratio: 2/3;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 3px 3px 0 var(--border2);
+}
+
+.book-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.book-cover-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--blush);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-size: 28px;
+    color: var(--hot-lt);
+}
+
+.book-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.book-status {
+    font-family: var(--body);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 2px;
+    align-self: flex-start;
+}
+
+.book-status-read {
+    background: rgba(162, 210, 255, 0.2);
+    color: var(--blue-dk);
+    border: 1px solid rgba(162, 210, 255, 0.4);
+}
+
+.book-status-reading {
+    background: rgba(255, 10, 84, 0.1);
+    color: var(--hot-dk);
+    border: 1px solid rgba(255, 10, 84, 0.25);
+}
+
+.book-status-want-to-read {
+    background: rgba(134, 22, 87, 0.08);
+    color: var(--plum);
+    border: 1px solid rgba(134, 22, 87, 0.2);
+}
+
+.book-title {
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.3;
+    margin: 0;
+}
+
+.book-author {
+    font-family: var(--body);
+    font-size: 12px;
+    color: var(--dimmed);
+}
+
+.book-review {
+    font-family: var(--body);
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    font-style: italic;
+    margin-top: 2px;
+}
+
+/* ═══════════════════════════════════════════════════
+   MOVIES
+   ═══════════════════════════════════════════════════ */
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+}
+
+.movie-card {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform 0.2s;
+}
+
+.movie-card:hover {
+    transform: translateY(-4px);
+}
+
+.movie-poster {
+    aspect-ratio: 2/3;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    background: var(--blush);
+    border: 1px solid var(--border);
+}
+
+.movie-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.movie-card:hover .movie-poster img {
+    transform: scale(1.04);
+}
+
+.movie-poster-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(13, 0, 16, 0.6);
+    opacity: 0;
+    transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.movie-card:hover .movie-poster-overlay {
+    opacity: 1;
+}
+
+.movie-hover-label {
+    font-family: var(--body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.movie-poster-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--blush);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px;
+}
+
+.movie-poster-placeholder span {
+    font-size: 32px;
+}
+
+.movie-poster-placeholder p {
+    font-family: var(--display);
+    font-size: 13px;
+    font-style: italic;
+    color: var(--dimmed);
+    text-align: center;
+}
+
+.movie-card-info {
+    padding: 0 2px;
+}
+
+.movie-card-title {
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movie-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.movie-card-year {
+    font-family: var(--body);
+    font-size: 10px;
+    color: var(--dimmed);
+    letter-spacing: 0.05em;
+}
+
+/* ── Movie detail overlay ───────────────────────────── */
+.movie-detail-window {
+    background: #fdf8f3;
+    border-radius: 4px;
+    max-width: 600px;
+    width: 100%;
+    position: relative;
+    padding: 32px;
+    box-shadow: 0 2px 0 #e8ddd0, 0 32px 80px rgba(0, 0, 0, 0.45);
+    animation: lb-slide 0.28s cubic-bezier(0.23, 1, 0.32, 1);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.movie-detail-inner {
+    display: flex;
+    gap: 24px;
+}
+
+.movie-detail-poster {
+    width: 160px;
+    flex-shrink: 0;
+    aspect-ratio: 2/3;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 4px 4px 0 var(--border2);
+}
+
+.movie-detail-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.movie-detail-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.movie-detail-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.movie-year-badge,
+.movie-genre-badge {
+    font-family: var(--body);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 2px;
+}
+
+.movie-year-badge {
+    background: rgba(162, 210, 255, 0.2);
+    color: var(--blue-dk);
+    border: 1px solid rgba(162, 210, 255, 0.4);
+}
+
+.movie-genre-badge {
+    background: rgba(255, 10, 84, 0.08);
+    color: var(--hot-dk);
+    border: 1px solid rgba(255, 10, 84, 0.2);
+}
+
+.movie-detail-title {
+    font-family: var(--display);
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.2;
+    margin: 0;
+}
+
+.movie-watched-date {
+    font-family: var(--body);
+    font-size: 11px;
+    color: var(--dimmed);
+    letter-spacing: 0.08em;
+}
+
+.movie-review {
+    font-family: var(--display);
+    font-size: 14px;
+    font-style: italic;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+/* ── Mobile ─────────────────────────────────────────── */
+@media (max-width: 640px) {
+    .media-page {
+        padding: 100px 16px 80px;
+    }
+
+    .books-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 12px;
+    }
+
+    .media-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .media-form-full {
+        grid-column: span 1;
+    }
+
+    .movie-detail-inner {
+        flex-direction: column;
+    }
+
+    .movie-detail-poster {
+        width: 100%;
+        max-width: 200px;
+        aspect-ratio: 2/3;
+    }
+
+    .media-controls {
+        flex-direction: column;
+    }
+
+    .media-modal {
+        padding: 24px 20px;
+    }
+}

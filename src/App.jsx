@@ -9,6 +9,8 @@ import EasterEggs from "./components/EasterEggs";
 import Postcards from "./pages/Postcards";
 import Contact from "./pages/Contact";
 import CalendarPage from "./pages/Calendar";
+import BooksPage from "./pages/Books";
+import MoviesPage from "./pages/Movies";
 
 function Cursor() {
   const dot = useRef(null);
@@ -43,16 +45,16 @@ export default function App() {
       )}
 
       {page === "postcards" && <Postcards />}
-      {page === "contact" && <Contact />}
-      {page === "calendar" && <CalendarPage />}
+      {page === "contact"   && <Contact />}
+      {page === "calendar"  && <CalendarPage />}
+      {page === "books"     && <BooksPage />}
+      {page === "movies"    && <MoviesPage />}
 
       <footer>
         <span className="footer-copy">
           © 2026 — All rights reserved
           {" · "}
-          <span className="footer-secret" data-easter-egg="labs" title="👀">
-            404
-          </span>
+          <span className="footer-secret" data-easter-egg="labs" title="👀">404</span>
         </span>
       </footer>
 
