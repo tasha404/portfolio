@@ -5343,7 +5343,9 @@ a.contact-detail-val:hover {
 
 .book-cover {
     width: 72px;
+    min-width: 72px;
     flex-shrink: 0;
+    align-self: flex-start;
     aspect-ratio: 2/3;
     border-radius: 2px;
     overflow: hidden;
