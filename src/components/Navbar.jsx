@@ -33,8 +33,7 @@ export default function Navbar({ page, setPage }) {
         </div>
 
         <div className="nav-right">
-          <a className="nav-link" href="#about" onClick={(e) => { e.preventDefault(); goTo("home", "about"); }}>About</a>
-          <a className="nav-link" href="#projects" onClick={(e) => { e.preventDefault(); goTo("home", "projects"); }}>Projects</a>
+       
           <a className="nav-link" href="#postcards" onClick={(e) => { e.preventDefault(); goTo("postcards"); }} style={{ color: page === "postcards" ? "var(--hot)" : undefined }}>Postcards</a>
           <a className="nav-link" href="#diary" onClick={(e) => { e.preventDefault(); goTo("calendar"); }} style={{ color: page === "calendar" ? "var(--hot)" : undefined }}>Diary</a>
           <a className="nav-link" href="#books" onClick={(e) => { e.preventDefault(); goTo("books"); }} style={{ color: page === "books" ? "var(--hot)" : undefined }}>Books</a>
@@ -54,7 +53,7 @@ export default function Navbar({ page, setPage }) {
 
       <div className={`nav-drawer${menuOpen ? " open" : ""}`}>
         <div className="nav-drawer-links">
-          <a className="nav-drawer-link" onClick={() => goTo("home", "about")} href="#about">About</a>
+         <a className="nav-drawer-link" onClick={() => goTo("home", "about")} href="#about">About</a>
           <a className="nav-drawer-link" onClick={() => goTo("home", "projects")} href="#projects">Projects</a>
           <a className="nav-drawer-link" onClick={() => goTo("postcards")} href="#postcards" style={{ color: page === "postcards" ? "var(--hot)" : undefined }}>Postcards</a>
           <a className="nav-drawer-link" onClick={() => goTo("calendar")} href="#diary" style={{ color: page === "calendar" ? "var(--hot)" : undefined }}>Diary</a>

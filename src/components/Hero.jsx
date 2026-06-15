@@ -1,10 +1,10 @@
 export default function Hero() {
-  const today = new Date().toLocaleDateString("en-MY", { day: "numeric", month: "long", year: "numeric" });
+  
 
   return (
     <section className="hero">
       <div className="hero-left">
-        <span className="hero-date">{today}</span>
+
         <p className="hero-eyebrow">CS graduate &amp; Developer</p>
         <h1 className="hero-headline">
           Building<br />
