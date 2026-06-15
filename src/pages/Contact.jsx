@@ -98,17 +98,7 @@ async function handleSubmit(e) {
           </div>
         </div>
 
-        <div className="contact-socials">
-          <a href="https://github.com/tasha404" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-            <FaGithub />
-          </a>
-          <a href="https://www.linkedin.com/in/ntashanadia" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <FaLinkedin />
-          </a>
-          <a href="https://instagram.com/ntashandia" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <FaInstagram />
-          </a>
-        </div>
+        
 
         {/* decorative lined paper rule */}
         <div className="contact-deco-lines" aria-hidden="true">
@@ -131,10 +121,7 @@ async function handleSubmit(e) {
           </div>
         ) : (
           <form className="contact-form" onSubmit={handleSubmit} noValidate>
-            <div className="contact-form-header">
-              <span className="contact-form-tag">inquiry form</span>
-            </div>
-
+           
             {/* Name + Email row */}
             <div className="cf-row">
               <div className="cf-field">
