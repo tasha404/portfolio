@@ -42,7 +42,7 @@ const projects = [
     description: "AI-powered chatbot using the OpenAI API — built to assist with tasks, questions, and productivity in a clean interactive interface.",
     image: "/images/kiinai.png",
     link: "https://kiinai.vercel.app/",
-    status: "ONGOING",
+    status: "COMPLETED",
     accentColor: "#7a8fa6",
     thumbnail: { emoji: "🤖", bg: "linear-gradient(135deg, #dce8f0 0%, #c4d9e8 60%, #a8c4d8 100%)", label: "AI chatbot" },
     tech: [
