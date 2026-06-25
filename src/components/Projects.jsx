@@ -40,7 +40,7 @@ const projects = [
   {
     title: "KiinAI",
     description: "AI-powered chatbot using the OpenAI API — built to assist with tasks, questions, and productivity in a clean interactive interface.",
-    image: "/images/kiinai.png",
+    image: "/images/kiinai.jpeg",
     link: "https://kiinai.vercel.app/",
     status: "COMPLETED",
     accentColor: "#7a8fa6",
