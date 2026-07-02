@@ -53,6 +53,21 @@ const projects = [
     ],
   },
   {
+    title: "Pantry Pilot",
+    description: "Clean pantry management app with AI-powered recipe suggestions — helping users track ingredients, plan meals, and reduce food waste.",
+    image: "/images/pantrypilot.jpg",
+    // link: "https://pantrypilot.vercel.app/",
+    status: "ONGOING",
+    accentColor: "#d4956a",
+    thumbnail: { emoji: "🤖", bg: "linear-gradient(135deg, #dce8f0 0%, #c4d9e8 60%, #a8c4d8 100%)", label: "AI chatbot" },
+    tech: [
+      { icon: <SiOpenai />, name: "OpenAI" },
+      { icon: <SiFirebase />, name: "Firebase" },
+      { icon: <SiReact />, name: "React" },
+      { icon: <SiJavascript />, name: "JS" },
+    ],
+  },  
+  {
     title: "Path Raiders",
     description: "A pathfinding visualiser bringing algorithms to life through interactive, animated step-by-step demonstrations.",
     image: "/images/pathraiders.png",
