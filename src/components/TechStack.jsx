@@ -27,7 +27,7 @@ const categories = [
   },
   {
     label: "Mobile",
-    items: ["Flutter", "Kotlin", "Dart", "Java", "Android Studio"],
+    items: ["Flutter", "Kotlin", "Dart", "Java", "Android Studio", "Expo Go"],
     style: { left: "4%", top: "240px", width: "220px", transform: "rotate(2.1deg)", zIndex: 6 },
     pin: null,
     bg: "#fbf6ef",
@@ -43,7 +43,7 @@ const categories = [
   },
   {
     label: "Deploy",
-    items: ["Vercel", "Netlify"],
+    items: ["Vercel", "Netlify", "Github"],
     style: { right: "3%", top: "290px", width: "170px", transform: "rotate(1.5deg)", zIndex: 4 },
     pin: "pin-right pin-ink",
     bg: "#f0e9de",
