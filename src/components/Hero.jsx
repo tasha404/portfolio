@@ -5,11 +5,11 @@ export default function Hero() {
     <section className="hero">
       <div className="hero-left">
 
-        <p className="hero-eyebrow">CS graduate &amp; Developer</p>
+        <p className="hero-eyebrow">Say it, i can build it.</p>
         <h1 className="hero-headline">
-          Building<br />
-          <em>intelligent</em><br />
-          things.
+          A nerd<br />
+          <em>looking for</em><br />
+          a job.
         </h1>
         <p className="hero-sub">
           AI systems, web &amp; mobile development, real-time

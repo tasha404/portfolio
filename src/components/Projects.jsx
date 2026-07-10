@@ -68,6 +68,36 @@ const projects = [
     ],
   },  
   {
+    title: "The Existential Elevator",
+    description: "An elevator that gives u shower thougts",
+    image: "/images/elevator.png",
+    link: "https://tasha404.github.io/existential-elevator/",
+    status: "COMPLETED",
+    accentColor: "#6e8c6a",
+    thumbnail: { emoji: "🗺️", bg: "linear-gradient(135deg, #d8ecd6 0%, #bfd9bb 60%, #9fc49a 100%)", label: "visualiser" },
+    tech: [
+      { icon: <SiJavascript />, name: "JS" },
+      { icon: <SiCss />, name: "CSS" },
+      { icon: <SiHtml5 />, name: "HTML5" },
+    ],
+  },
+  {
+    title: "Cozy Snazy Cafe",
+    description: "A cafe website with a cozy aesthetic, featuring a menu, gallery, and booking page — designed to attract customers and showcase the cafe's offerings.",
+    image: "/images/cozy.png",
+    link: "https://cozy-snazy.vercel.app/",
+    status: "ONGOING",
+    accentColor: "#d4956a",
+    thumbnail: { emoji: "🗺️", bg: "linear-gradient(135deg, #d8ecd6 0%, #bfd9bb 60%, #9fc49a 100%)", label: "visualiser" },
+    tech: [
+      { icon: <SiReact />, name: "React" },
+      { icon: <SiJavascript />, name: "JS" },
+      { icon: <SiCss />, name: "CSS" },
+      { icon: <SiHtml5 />, name: "HTML5" },
+      { icon: <SiFirebase />, name: "Firebase" }
+    ],
+  },
+  {
     title: "Path Raiders",
     description: "A pathfinding visualiser bringing algorithms to life through interactive, animated step-by-step demonstrations.",
     image: "/images/pathraiders.png",
@@ -81,6 +111,7 @@ const projects = [
       { icon: <SiHtml5 />, name: "HTML5" },
     ],
   },
+  
   {
     title: "CCTV Stranger Detector",
     description: "AI-powered surveillance system detecting unknown individuals in real-time using computer vision and face recognition.",

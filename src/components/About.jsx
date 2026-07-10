@@ -51,8 +51,7 @@ export default function About() {
       <div className="about-right">
         <div className="about-card">
           <img src="/images/hero.png" alt="Natasha Nadia" />
-          <span className="tag tag-date">Web Dev</span>
-          <span className="tag tag-role">Mobile Dev</span>
+     
           <div className="about-contact">
             <h3>Contact</h3>
             <p>Klang, Malaysia</p>

@@ -272,11 +272,6 @@ img {
     gap: 12px;
 }
 
-.hero-eyebrow::before {
-    content: '01';
-    font-size: 9px;
-    color: var(--dimmed);
-}
 
 .hero-headline {
     font-family: var(--display);
