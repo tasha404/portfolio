@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import ciscoBadge from "../images/cisco-badge.png";
 
 const achievements = [
   { tag: "Dean's List", title: "Semester 2", detail: "GPA 3.55 / 4.00" },
@@ -24,7 +25,6 @@ export default function About() {
   return (
     <section className="about" id="about" ref={ref}>
       <div className="about-left">
-     
         <h2 className="about-headline fade-up">Hello,<br />I'm <em>Natasha!</em></h2>
         <p className="about-body fade-up">
           I'm a Computer Science student driven to build intelligent, scalable,
@@ -33,7 +33,7 @@ export default function About() {
           I continuously strive to grow with every project I take on.
         </p>
         <a href="https://www.linkedin.com/in/ntashanadia" target="_blank" rel="noopener noreferrer" className="about-link fade-up">
-          linkedin.com/in/ntashanadia →
+          linkedin.com/in/ntashanadia
         </a>
         <div className="about-achievements">
           <h3>Achievements &amp; Certifications</h3>
@@ -46,12 +46,24 @@ export default function About() {
               </div>
             ))}
           </div>
+
+          <a
+            href="https://www.credly.com/badges/b9f18032-1d94-427b-8044-07a955531b5f"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="credly-badge fade-up"
+          >
+            <img src={ciscoBadge} alt="Cisco Certified" />
+            <div className="credly-badge-text">
+              <span className="credly-badge-verify">CISCO</span>
+              <span className="credly-badge-title">Introduction to IoT and Digital Transformation</span>
+            </div>
+          </a>
         </div>
       </div>
       <div className="about-right">
         <div className="about-card">
           <img src="/images/hero.png" alt="Natasha Nadia" />
-     
           <div className="about-contact">
             <h3>Contact</h3>
             <p>Klang, Malaysia</p>

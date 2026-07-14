@@ -42,7 +42,7 @@ export default function Navbar({ page, setPage }) {
           <div className="nav-icons">
             <a href="https://github.com/tasha404" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
             <a href="https://www.linkedin.com/in/ntashanadia" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
-            <a href="https://instagram.com/ntashandia" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+            <a href="https://instagram.com/tasha404.exe" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
           </div>
         </div>
 

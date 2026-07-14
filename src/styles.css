@@ -507,7 +507,61 @@ img {
     color: var(--dimmed);
     margin-bottom: 14px;
 }
+.credly-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 20px;
+    padding: 14px 18px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
 
+.credly-badge:hover {
+    transform: translateY(-3px);
+    border-color: var(--hot-lt);
+    box-shadow: 0 8px 24px rgba(255, 10, 84, 0.1);
+}
+
+.credly-badge img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.credly-badge-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.credly-badge-title {
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.2;
+}
+
+.credly-badge-verify {
+    font-family: var(--body);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--hot-dk);
+    opacity: 0.65;
+    transition: opacity 0.2s;
+}
+
+.credly-badge:hover .credly-badge-verify {
+    opacity: 1;
+}
 .achievements-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
