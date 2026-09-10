@@ -42,8 +42,8 @@ const projects = [
     description: "AI-powered chatbot using the OpenAI API — built to assist with tasks, questions, and productivity in a clean interactive interface.",
     image: "/images/kiinai.jpeg",
     link: "https://kiinai.vercel.app/",
-    status: "COMPLETED",
-    accentColor: "#7a8fa6",
+    status: "ONGOING",
+    accentColor: "#d4956a",
     thumbnail: { emoji: "🤖", bg: "linear-gradient(135deg, #dce8f0 0%, #c4d9e8 60%, #a8c4d8 100%)", label: "AI chatbot" },
     tech: [
       { icon: <SiOpenai />, name: "OpenAI" },
@@ -118,7 +118,7 @@ const projects = [
     image: null,
     link: null,
     status: "COMPLETED",
-    accentColor: "#8a6a9a",
+    accentColor: "#6e8c6a",
     thumbnail: {  bg: "linear-gradient(135deg, #e8daf0 0%, #d4c0e4 60%, #bfa0d4 100%)", label: "CV · IoT" },
     tech: [
       { icon: <SiOpencv />, name: "OpenCV" },
@@ -134,7 +134,7 @@ const projects = [
     image: null,
     link: "https://www.youtube.com/shorts/GBnp0Fy55JY",
     status: "COMPLETED",
-    accentColor: "#b0804e",
+    accentColor: "#6e8c6a",
     thumbnail: { bg: "linear-gradient(135deg, #f0e0c8 0%, #e4ccaa 60%, #d4b080 100%)", label: "android game" },
     tech: [
       { icon: <SiKotlin />, name: "Kotlin" },
