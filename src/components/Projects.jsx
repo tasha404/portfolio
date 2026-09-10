@@ -86,8 +86,8 @@ const projects = [
     description: "A cafe website with a cozy aesthetic, featuring a menu, gallery, and booking page — designed to attract customers and showcase the cafe's offerings.",
     image: "/images/cozy.png",
     link: "https://cozy-snazy.vercel.app/",
-    status: "ONGOING",
-    accentColor: "#d4956a",
+    status: "COMPLETED",
+    accentColor: "#6e8c6a",
     thumbnail: { emoji: "🗺️", bg: "linear-gradient(135deg, #d8ecd6 0%, #bfd9bb 60%, #9fc49a 100%)", label: "visualiser" },
     tech: [
       { icon: <SiReact />, name: "React" },
